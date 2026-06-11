@@ -1,15 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Employees Table</title>
-    <script src="https://kit.fontawesome.com/cfea9fe99d.js" crossorigin="anonymous"></script>
-    @vite('resources/css/app.css')
+@extends('layouts.app-layout')
 
-</head>
-<body class="bg-gray-100 p-8">
-    @include('header')
+@section('title','departments')
+
+@section('content')
     <div class="max-w-7xl mx-auto mt-5">
         <div class="bg-white shadow-lg rounded-lg overflow-hidden">
             
@@ -70,7 +63,6 @@
 
         
     </div>
-<script src="https://code.jquery.com/jquery-4.0.0.min.js" integrity="sha256-OaVG6prZf4v69dPg6PhVattBXkcOWQB62pdZ3ORyrao=" crossorigin="anonymous"></script>
-@vite('resources/js/script.js')
-</body>
-</html>
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js" integrity="sha256-OaVG6prZf4v69dPg6PhVattBXkcOWQB62pdZ3ORyrao=" crossorigin="anonymous"></script>
+    @vite('resources/js/script.js')
+@endsection

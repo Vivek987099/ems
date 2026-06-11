@@ -78,7 +78,35 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        
+        $emp = Employee::find($id);
+        $oldProfileImg = $emp -> profile_image;
+        $oldUserId = $emp->user_id;
+        $emp->name = $request->name;
+        $emp->city=$request->city;
+        $emp->department_id=$request->department_id;
+        $emp->gender=$request->gender;
+        $emp->phone=$request->phone;
+        $emp->address=$request->address;
+        if($request->user_id){
+            $emp->user_id=$request->user_id;
+        }else{
+            $emp->user_id=$oldUserId;
+        }
+        if($request->hasFile('profile_image')){
+            if($emp->profile_image){
+                $path = public_path('/storage/').$emp->profile_image;
+                unlink($path);
+            }
+            $emp->profile_image = $request->file('profile_image')->store('image','public');
+        }else{
+            $emp->profile_image=$oldProfileImg;
+        }
+        if($emp->save()){
+            return response()->json([
+                'status'=>true,
+                'message'=>'Employee updated successfully'
+            ]);
+        }
     }
 
     /**
@@ -89,8 +117,8 @@ class EmployeeController extends Controller
         $emp = Employee::find($id);
         if($emp){
 
-            if($emp->profile_image !== null || !empty($emp->profile_image)){
-                $file = public_path('storage').$emp->profile_image;
+            if($emp->profile_image){
+                $file = public_path('/storage/').$emp->profile_image;
                 if(file_exists($file)){
                     unlink($file);
                 }

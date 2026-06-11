@@ -1,8 +1,5 @@
 import './bootstrap';
 
-
-
-
 $(document).ready(function(){
     
     $('#toggle-password').on('click',function(){

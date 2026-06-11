@@ -1,4 +1,7 @@
 $(document).ready(function(){
+    if(!localStorage.getItem('token')){
+        window.location.href='/'
+    }
     function loadUsers(){
         $.ajax({
             url:'/api/users',
@@ -33,13 +36,76 @@ $(document).ready(function(){
             }
         })
     }
+    function loadRoles(){
+        $.ajax({
+            url:'/api/roles',
+            type:'GET',
+            headers:{
+                'Authorization':`Bearer ${localStorage.getItem('token')}`
+            },
+            success:function(response){
+                let checkboxes ='';
+                let data = response.data;
+                $.each(data,function(index,role){
+                    checkboxes += `<div>
+                        <input
+                        type="checkbox"
+                        id="${role.id}"
+                        name="roles[]"
+                        value="${role.id}"
+                        class="px-4 py-2 inline border border-gray-300 rounded-lg "
+                        required
+                        >
+                        <label for="${role.id}"  class="cursor-pointer">${role.name}</label>
+                    </div>`;
+                })
+                $('#role').html(checkboxes)
+
+                
+
+            }
+        })
+    }
+    
     $(document).on('click','.delete-btn',function(){
-       alert('This feature will be implemented soon')
+       let id = $(this).data('id')
+       $.ajax({
+            url:`/api/users/${id}`,
+            type:'DELETE',
+            headers:{
+                'Authorization':`Bearer ${localStorage.getItem('token')}`
+            },
+            success:function(response){
+                if(response.status){
+                    alert(response.message)
+                    loadRoles()
+                }
+            }
+        })
     })
     $(document).on('click','.edit-btn',function(){
         let id = $(this).data('id')
-        alert(`you id is ${id}`)
+        if(id){
+            $('#update-user-model').removeClass('hidden').addClass('flex')
+            $.ajax({
+                url:`/api/users/${id}`,
+                type:'GET',
+                headers:{
+                    'Authorization':`Bearer ${localStorage.getItem('token')}`
+                },
+                success:function(response){
+                    if(response.status){
+                        $('#user-email').val(response.data.email)
+                        $('#user-id').val(response.data.id)
+                    }
+                }
+            })
+        }
     })
-
+    loadRoles()
     loadUsers()
+
+    $(document).on('click','.close-update-user-btn',function(){
+        $('#update-user-model').addClass('hidden').removeClass('flex')
+    })
 })

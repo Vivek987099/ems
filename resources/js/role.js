@@ -1,4 +1,7 @@
 $(document).ready(function(){
+    if(!localStorage.getItem('token')){
+        window.location.href='/'
+    }
     function loadAllRoles(){
         $.ajax({
             url:'/api/roles',
@@ -48,7 +51,7 @@ $(document).ready(function(){
     $(document).on('click','.edit-btn',function(){
         let id = $(this).data('id');
         if(id){
-            $('#update-role-model').removeClass('hidden')
+            $('#update-role-model').removeClass('hidden').addClass('flex')
             $.ajax({
                 url:`/api/roles/${id}`,
                 type:'GET',
@@ -61,7 +64,6 @@ $(document).ready(function(){
                 },
                 error:function(error){
                     console.log(error);
-                    
                 }
             })
         }
@@ -83,14 +85,13 @@ $(document).ready(function(){
                     $('#update-role-model').addClass('hidden')
                     loadAllRoles()
                 }
-                
             }
         })
         
         
     })
     $(document).on('click','.close-update-role-btn',function(){
-        $('#update-role-model').addClass('hidden')
+        $('#update-role-model').addClass('hidden').removeClass('flex')
     })
-
 })
+

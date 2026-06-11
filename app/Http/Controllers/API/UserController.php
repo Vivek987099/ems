@@ -53,4 +53,36 @@ class UserController extends Controller
             ]);
        }
     }
+
+    public function show($id){
+        $user = User::find($id);
+        if($user){
+            return response()->json([
+                'status'=>true,
+                'data'=>$user
+            ],200);
+        }else{
+            return response()->json([
+                'status'=>false,
+                'message'=>'User not found'
+            ],404);
+        }
+    }
+
+    public function destroy($id){
+        $user = User::find($id);
+        if($user){
+            if($user->delete()){
+                return response()->json([
+                    'status'=>true,
+                    'message'=>'User Deleted Successfully'
+                ]);
+            }
+        }else{
+            return response()->json([
+                'status'=>false,
+                'message'=>'user not found'
+            ]);
+        }
+    }
 }

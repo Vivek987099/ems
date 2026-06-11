@@ -26,6 +26,12 @@ class AuthController extends Controller
         }else{
             if(Auth::attempt(['email'=>$request->email,'password'=>$request->password])){
                 $user = Auth::user();
+                if (!$user->roles()->exists()) {
+                    return response()->json([
+                        'status' => false,
+                        'message' => 'No role assigned. Contact admin.'
+                    ], 403);
+                }
                 return response()->json([
                     'status'=>true,
                     'message'=>'user loggen in successfully',
@@ -40,7 +46,13 @@ class AuthController extends Controller
             }
         }
     }
-    public function logout(){
-        return 'hello world';
+    public function logout(Request $request){
+        $user = $request->user();
+        if($user->tokens()->delete()){
+            return response()->json([
+                'status'=>true,
+                'message'=>'Logout successfully'
+            ]);
+        }
     }
 }

@@ -1,15 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Employees Table</title>
-    <script src="https://kit.fontawesome.com/cfea9fe99d.js" crossorigin="anonymous"></script>
-    @vite('resources/css/app.css')
+@extends('layouts.app-layout')
 
-</head>
-<body class="bg-gray-100 p-8">
-    @include('header')
+@section('title','roles')
+    
+@section('content')
     <div class="max-w-7xl mx-auto mt-5">
         <div class="bg-white shadow-lg rounded-lg overflow-hidden">
             
@@ -37,9 +30,9 @@
 
         </div>
     </div>
-    <div id="update-role-model" class="w-full hidden h-screen bg-gray-500/40 absolute left-0 top-0 flex justify-center items-center">
+    <div id="update-role-model" class="w-full hidden flex h-screen bg-gray-500/40 absolute left-0 top-0  justify-center items-center">
 
-        <form id="update-role-form" action="#" method="POST" class="space-y-5 bg-white p-8 rounded mx-auto min-w-2xl">
+        <form id="update-role-form" action="#" method="POST" class=" space-y-5 bg-white p-8 rounded mx-auto min-w-2xl">
             <div class="flex justify-between items-center">
                 <h1 class="text-3xl text-center font-semibold uppercase text-gray-600">Update Role</h1>
                 <span class="close-update-role-btn outline-2 cursor-pointer rounded px-3 py-2 outline-red-500 text-red-500">X</span>
@@ -63,13 +56,12 @@
                 type="submit"
                 class="w-full bg-blue-600 text-white py-2.5 cursor-pointer rounded-lg hover:bg-blue-700 transition duration-200 font-medium"
             >
-                Create Role
+                Update
             </button>
 
         </form>
     </div>
-    
-<script src="https://code.jquery.com/jquery-4.0.0.min.js" integrity="sha256-OaVG6prZf4v69dPg6PhVattBXkcOWQB62pdZ3ORyrao=" crossorigin="anonymous"></script>
-@vite('resources/js/role.js')
-</body>
-</html>
+
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js" integrity="sha256-OaVG6prZf4v69dPg6PhVattBXkcOWQB62pdZ3ORyrao=" crossorigin="anonymous"></script>
+    @vite('resources/js/role.js')
+@endsection

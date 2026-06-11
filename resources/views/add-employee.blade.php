@@ -126,6 +126,9 @@
 <script src="https://code.jquery.com/jquery-4.0.0.min.js" integrity="sha256-OaVG6prZf4v69dPg6PhVattBXkcOWQB62pdZ3ORyrao=" crossorigin="anonymous"></script>
 <script>
     $(document).ready(function(){
+        if(!localStorage.getItem('token')){
+        window.location.href='/'
+    }
         function loadDepartment(){
             $.ajax({
                 url:'/api/departments',

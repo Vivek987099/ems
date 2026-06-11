@@ -1,4 +1,7 @@
 $(document).ready(function(){
+    if(!localStorage.getItem('token')){
+        window.location.href='/'
+    }
     function loadDepartments(){
         $.ajax({
             url:'api/departments',
