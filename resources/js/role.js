@@ -87,11 +87,8 @@ $(document).ready(function(){
                 }
             }
         })
-        
-        
     })
     $(document).on('click','.close-update-role-btn',function(){
         $('#update-role-model').addClass('hidden').removeClass('flex')
     })
 })
-

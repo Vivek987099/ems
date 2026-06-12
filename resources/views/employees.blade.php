@@ -22,6 +22,7 @@
                             <th class="px-6 py-4">Phone</th>
                             <th class="px-6 py-4">City</th>
                             <th class="px-6 py-4">Department</th>
+                            <th class="px-6 py-4">Profile</th>
                             <th class="px-6 py-4">Action</th>
                         </tr>
                     </thead>

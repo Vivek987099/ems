@@ -11,12 +11,9 @@ $(document).ready(function(){
             },
             success:function(response){
                 let data = response.data
-                let roles =''
                 let rows=''
                 $.each(data,function(index,user){
-                    $.each(user.roles,function(index,role){
-                        roles += role.name
-                    }).join(',')
+                    let roles = user.roles.map(role => role.name).join(', ');
                     rows += ` <tr class="hover:bg-gray-50">
                             <td class="px-6 py-4 font-medium">${user.id}</td>
                             <td class="">${user.email}</td>
@@ -25,14 +22,12 @@ $(document).ready(function(){
                                 <button data-id="${user.id}" class="edit-btn text-white px-4 py-1 rounded cursor-pointer bg-green-500">Edit</button>
                                 <button data-id="${user.id}" class="delete-btn text-white px-4 py-1 rounded cursor-pointer bg-red-500">Delete</button>
                             </td>
-                             
-                        </tr>`;
+                    </tr>`;
                 })
                 $('#userdata').html(rows)
             },
             error:function(err){
                 console.log(err);
-                
             }
         })
     }
@@ -51,18 +46,14 @@ $(document).ready(function(){
                         <input
                         type="checkbox"
                         id="${role.id}"
-                        name="roles[]"
+                        name="role_id[]"
                         value="${role.id}"
                         class="px-4 py-2 inline border border-gray-300 rounded-lg "
-                        required
                         >
                         <label for="${role.id}"  class="cursor-pointer">${role.name}</label>
                     </div>`;
                 })
                 $('#role').html(checkboxes)
-
-                
-
             }
         })
     }
@@ -78,7 +69,7 @@ $(document).ready(function(){
             success:function(response){
                 if(response.status){
                     alert(response.message)
-                    loadRoles()
+                    loadUsers()
                 }
             }
         })
@@ -95,8 +86,12 @@ $(document).ready(function(){
                 },
                 success:function(response){
                     if(response.status){
+                        $('input[name="role_id[]"]').prop('checked', false);
                         $('#user-email').val(response.data.email)
                         $('#user-id').val(response.data.id)
+                        $.each(response.data.roles, function(index, role) {
+                            $(`input[value="${role.id}"]`).prop('checked', true);
+                        });
                     }
                 }
             })
@@ -107,5 +102,29 @@ $(document).ready(function(){
 
     $(document).on('click','.close-update-user-btn',function(){
         $('#update-user-model').addClass('hidden').removeClass('flex')
+    })
+
+    $('#update-user-form').on('submit',function(e){
+        e.preventDefault()
+        let userId = $('#user-id').val()
+        $.ajax({
+            url:`/api/users/${userId}`,
+            type:'PUT',
+            data:$(this).serialize(),
+            headers:{
+                'Authorization':`Bearer ${localStorage.getItem('token')}`
+            },
+            success:function(response){
+                if(response.status){
+                    $('#update-user-model').addClass('hidden').removeClass('flex')
+                    alert(response.message)
+                    loadUsers()
+                }
+            },
+            error:function(err){
+                console.log(err);
+            }
+        })
+
     })
 })

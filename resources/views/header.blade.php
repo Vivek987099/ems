@@ -22,7 +22,7 @@
 
                     <li>
                         <a href="{{ route('web.departments.index') }}"
-                           class="{{ (request()->routeIs('web.departments.index')) ? 'text-blue-600' : 'text-gray-700' }} group flex justify-center  items-center gap-x-1  hover:text-blue-600 font-medium transition">
+                           class="{{ (request()->routeIs('web.departments.*')) ? 'text-blue-600' : 'text-gray-700' }} group flex justify-center  items-center gap-x-1  hover:text-blue-600 font-medium transition">
                             Departments
                             <i class="fa-solid fa-angle-down text-sm"></i>
                         </a>
@@ -30,7 +30,7 @@
 
                     <li>
                         <a href="{{ route('web.users.index') }}"
-                           class="{{ (request()->routeIs('web.users.index')) ? 'text-blue-600' : 'text-gray-700' }} group flex justify-center  items-center gap-x-1  hover:text-blue-600 font-medium transition">
+                           class="{{ (request()->routeIs('web.users.*')) ? 'text-blue-600' : 'text-gray-700' }} group flex justify-center  items-center gap-x-1  hover:text-blue-600 font-medium transition">
                             Users
                             <i class="fa-solid fa-angle-down text-sm"></i>
                         </a>
@@ -38,7 +38,7 @@
 
                     <li>
                         <a href="{{ route('web.roles.index') }}"
-                           class="{{ (request()->routeIs('web.roles.index')) ? 'text-blue-600' : 'text-gray-700' }} group flex justify-center  items-center gap-x-1  hover:text-blue-600 font-medium transition">
+                           class="{{ (request()->routeIs('web.roles.*')) ? 'text-blue-600' : 'text-gray-700' }} group flex justify-center  items-center gap-x-1  hover:text-blue-600 font-medium transition">
                             Roles
                             <i class="fa-solid fa-angle-down text-sm"></i>
                         </a>

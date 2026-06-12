@@ -17,6 +17,7 @@ Route::middleware(['auth:sanctum','role:admin'])->group(function (){
         Route::get('/users','allUsers');
         Route::get('/users/no-emp','userWithNoEmp');
         Route::get('/users/{id}','show');
+        Route::put('/users/{id}','update');
         Route::delete('/users/{id}','destroy');
     });
     Route::apiResource('/employees',EmployeeController::class);

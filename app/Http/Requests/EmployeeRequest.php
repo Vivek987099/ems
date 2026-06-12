@@ -32,4 +32,13 @@ class EmployeeRequest extends FormRequest
             'department_id'=>'required | exists:departments,id'
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'user_id.required'=>'Please select user',
+            'department_id.required'=>'Please select department'
+        ];
+    }
+
 }

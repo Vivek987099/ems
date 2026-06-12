@@ -14,7 +14,7 @@ class UserController extends Controller
             'email'=> $req -> email,
             'password'=> $req -> password
         ]);
-        $user -> roles()->attach($req->role_id);
+        $user -> roles()->sync($req->role_id);
         if($user){
             return response() -> json([
                 'status'=> true,
@@ -55,7 +55,7 @@ class UserController extends Controller
     }
 
     public function show($id){
-        $user = User::find($id);
+        $user = User::with('roles')->find($id);
         if($user){
             return response()->json([
                 'status'=>true,
@@ -66,6 +66,20 @@ class UserController extends Controller
                 'status'=>false,
                 'message'=>'User not found'
             ],404);
+        }
+    }
+
+    public function update(Request $req, String $id){
+        $user = User::find($id);
+        if($user){
+            $user->update([
+                'email' => $req->email
+            ]);
+            $user->roles()->sync($req->role_id);
+            return response()->json([
+                'status'=>true,
+                'message'=>'User updated successfully'
+            ]);
         }
     }
 

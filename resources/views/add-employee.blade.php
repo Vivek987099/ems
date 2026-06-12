@@ -26,8 +26,9 @@
                         name="name"
                         placeholder="Employee name"
                         class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        required
+                        
                     >
+                    <span class="text-red-500 error-name"></span>
                 </div>
                 <div>
                     <label for="address" class="block text-sm font-medium text-gray-700 mb-2">
@@ -39,7 +40,6 @@
                         name="address"
                         placeholder="Address"
                         class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        required
                     >
                 </div>
                 <div>
@@ -52,8 +52,8 @@
                         name="city"
                         placeholder="Enter city"
                         class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        required
                     >
+                    <span class="text-red-500 error-city"></span>
                 </div>
                 <div>
                     <h4 class="block text-sm font-medium text-gray-700 mb-4">
@@ -61,14 +61,15 @@
                     </h4>
                     <div class="flex gap-x-5">
                         <div>
-                            <input type="radio" value="Male" required name="gender" class="peer hidden" id="male">
+                            <input type="radio" value="Male"  name="gender" class="peer sr-only" id="male">
                             <label for="male" class="ring-1 px-6 py-1.5 rounded ring-indigo-600 text-indigo-600 cursor-pointer peer-checked:bg-indigo-600 peer-checked:text-white ">Male</label>
                         </div>
                         <div>
-                            <input type="radio" value="Female" required name="gender" class="peer hidden" id="female">
+                            <input type="radio" value="Female"  name="gender" class="peer sr-only" id="female">
                             <label for="female" class="ring-1 px-6 py-1.5 rounded ring-indigo-600 text-indigo-600 cursor-pointer peer-checked:bg-indigo-600 peer-checked:text-white ">Female</label>
                         </div>
                     </div>
+                    <span class="text-red-500 error-gender"></span>
                 </div>
                 <div>
                     <label for="department_name" class="block text-sm font-medium text-gray-700 mb-2">
@@ -80,8 +81,8 @@
                         name="phone"
                         placeholder="XXXXXXXXXX"
                         class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        required
                     >
+                    <span class="text-red-500 error-phone"></span>
                 </div>
                 <div>
                     <label for="department" class="block text-sm font-medium text-gray-700 mb-2">
@@ -90,6 +91,7 @@
                     <select name="department_id" id="departments" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                         <!-- options -->
                     </select>
+                    <span class="text-red-500 error-department_id"></span>
                 </div>
                 <div>
                     <label for="users" class="block text-sm font-medium text-gray-700 mb-2">
@@ -98,6 +100,7 @@
                     <select name="user_id" id="users" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                         <!-- options -->
                     </select>
+                    <span class="text-red-500 error-user_id"></span>
                 </div>
                 <div>
                     <label for="profile-image" class="block text-sm font-medium text-gray-700 mb-2">
@@ -109,7 +112,7 @@
                         name="profile_image"
                         accept="image/*"
                         class="w-full px-4 py-2 border border-gray-300 rounded-lg bg-blue-600 cursor-pointer text-white"
-                        required
+                        
                     >
                 </div>
             </div>
@@ -187,7 +190,10 @@
                     }
                 },
                 error:function(err){
-                    console.log(err);
+                    let errors = err.responseJSON.errors;
+                    $.each(errors,function(field,messages){
+                        $(`.error-${field}`).text(messages[0]);
+                    })
                 }
             })
         })

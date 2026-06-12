@@ -65,6 +65,7 @@ $(document).ready(function(){
                             <td class="px-6 py-4">${emp.address}</td>
                             <td class="px-6 py-4">${emp.city}</td>
                             <td class="px-6 py-4">${emp.department?.department_name ? emp.department?.department_name : '<span class="text-red-500">No Department Assign</span>'}</td>
+                            <td class="px-6 py-4"><a href="/employees/${emp.id}" data-id="${emp.id}" class="profile-btn text-white px-4 py-1 rounded cursor-pointer bg-blue-500">View</a></td>
                             <td class="px-6 py-4">
                                 <button data-id="${emp.id}" class="edit-btn text-white px-4 py-1 rounded cursor-pointer bg-green-500">Edit</button>
                                 <button data-id="${emp.id}" class="delete-btn text-white px-4 py-1 rounded cursor-pointer bg-red-500">Delete</button>

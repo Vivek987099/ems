@@ -6,8 +6,9 @@
     <div class="max-w-7xl mx-auto mt-5">
         <div class="bg-white shadow-lg rounded-lg overflow-hidden">
             
-            <div class="p-6 border-b">
-                <h1 class="text-2xl font-bold text-gray-800">Employees List</h1>
+            <div class="p-6 border-b flex justify-between items-center">
+                <h1 class="text-2xl font-bold text-gray-800">Users List</h1>
+                <a href="{{ route('web.users.add') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded">Add User</a>
             </div>
 
             <div class="overflow-x-auto">
@@ -39,14 +40,14 @@
                 <span class="close-update-user-btn outline-2 cursor-pointer rounded px-3 py-2 outline-red-500 text-red-500">X</span>
             </div>
             <div>
-                <label for="department_name" class="block text-sm font-medium text-gray-700 mb-2">
+                <label for="user-email" class="block text-sm font-medium text-gray-700 mb-2">
                     User Email
                 </label>
                 <input
                     type="text"
                     id="user-email"
-                    name="name"
-                    placeholder="Enter department name"
+                    name="email"
+                    placeholder="Enter user email"
                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     required
                 >
