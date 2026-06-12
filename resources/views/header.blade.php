@@ -45,7 +45,7 @@
                     </li>
                 </ul>
             </nav>
-            <button class="bg-indigo-500 px-6 py-2 rounded text-white cursor-pointer hover:bg-indigo-600">Logout</button>
+            <button id="logout-btn" class="bg-indigo-500 px-6 py-2 rounded text-white cursor-pointer hover:bg-indigo-600">Logout</button>
 
         </div>
     </div>
