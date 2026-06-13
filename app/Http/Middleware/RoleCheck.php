@@ -13,7 +13,7 @@ class RoleCheck
      *
      * @param  Closure(Request): (Response)  $next
      */
-    public function handle(Request $request, Closure $next, String $role): Response
+    public function handle(Request $request, Closure $next, String ...$role): Response
     {
         $user = $request->user();
         if(!$user){
@@ -21,7 +21,7 @@ class RoleCheck
                 'message'=>'Unauthenticated'
             ],401);
         }
-        $hasRole = $user ->roles()->where('name',$role)->exists();
+        $hasRole = $user ->roles()->whereIn('name',$role)->exists();
         if (!$hasRole) {
             return response()->json([
                 'message' => 'Unauthorized'

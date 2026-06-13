@@ -28,6 +28,7 @@
                 </table>
             </div>
         </div>
+        <div id="pagination" class="mt-4 flex gap-2"></div>
     </div>
 
     <!-- update user model -->

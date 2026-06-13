@@ -40,15 +40,15 @@ $(document).ready(function(){
         })
     }
 
-    function loadEmployees(){
+    function loadEmployees(page = 1){
         $.ajax({
-            url:'api/employees',
+            url:`api/employees?page=${page}`,
             type:'GET',
             headers:{
                 'Authorization':`bearer ${localStorage.getItem('token')}`
             },
             success:function(response){
-                let employees = response.data;
+                let employees = response.data.data;
                 let rows = '';
                 $.each(employees,function(index,emp){
                     rows += `<tr class="hover:bg-gray-50">
@@ -72,6 +72,7 @@ $(document).ready(function(){
                             </td>
                         </tr>`;
                 })
+                generatePagination(response.data)
                 $('#empdata').html(rows)
             }
         })
@@ -159,4 +160,21 @@ $(document).ready(function(){
     $(document).on('click','.close-update-employee-btn',function(){
         $('#update-emp-model').addClass('hidden')
     })
+
+    //  pagination function
+    function generatePagination(data){
+        $('#pagination').empty();
+        $.each(data.links,function(index,link){
+            $('#pagination').append(`
+                <button class="page-btn ${link.active ? 'bg-blue-500 text-white' : 'bg-white'} disabled:text-gray-500 px-3 py-1.5"
+                        data-page="${link.page}" ${link.page == null ? 'disabled' : ''}>
+                    ${link.label}
+                </button>
+            `);
+        })
+    }
+    $(document).on('click','.page-btn',function(){
+        let page = $(this).data('page');
+        loadEmployees(page);
+    });
 })

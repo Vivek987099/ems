@@ -30,7 +30,7 @@ class UserController extends Controller
     }
 
     public function allUsers(){
-        $users = User::with('roles')->get();
+        $users = User::with('roles')->paginate(5);
         if(count($users) > 0){
             return response()->json([
                 'status'=>true,

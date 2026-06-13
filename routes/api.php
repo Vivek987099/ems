@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('/register-user',[UserController::class,'registerUser']);
 Route::post('/login',[AuthController::class,'login']);
 
-Route::middleware(['auth:sanctum','role:admin'])->group(function (){
+Route::middleware(['auth:sanctum','role:admin,employee'])->group(function (){
     // user routes
     Route::controller(UserController::class)->group(function(){
         Route::get('/users','allUsers');

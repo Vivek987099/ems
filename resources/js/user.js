@@ -2,15 +2,15 @@ $(document).ready(function(){
     if(!localStorage.getItem('token')){
         window.location.href='/'
     }
-    function loadUsers(){
+    function loadUsers(page = 1){
         $.ajax({
-            url:'/api/users',
+            url:`/api/users?page=${page}`,
             type:'GET',
             headers:{
                 'Authorization':`Bearer ${localStorage.getItem('token')}`
             },
             success:function(response){
-                let data = response.data
+                let data = response.data.data
                 let rows=''
                 $.each(data,function(index,user){
                     let roles = user.roles.map(role => role.name).join(', ');
@@ -24,6 +24,7 @@ $(document).ready(function(){
                             </td>
                     </tr>`;
                 })
+                generatePagination(response.data)
                 $('#userdata').html(rows)
             },
             error:function(err){
@@ -125,6 +126,23 @@ $(document).ready(function(){
                 console.log(err);
             }
         })
-
     })
+    
+    //  pagination function
+    function generatePagination(data){
+        $('#pagination').empty();
+        $.each(data.links,function(index,link){
+            $('#pagination').append(`
+                <button class="page-btn ${link.active ? 'bg-blue-500 text-white' : 'bg-white'} disabled:text-gray-500 px-3 py-1.5"
+                        data-page="${link.page}" ${link.page == null ? 'disabled' : ''}>
+                    ${link.label}
+                </button>
+            `);
+        })
+    }
+
+    $(document).on('click','.page-btn',function(){
+        let page = $(this).data('page');
+        loadUsers(page)
+    });
 })

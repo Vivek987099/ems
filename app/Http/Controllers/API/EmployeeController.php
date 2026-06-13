@@ -14,7 +14,7 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $employees = Employee::with(['user','department']) -> get();
+        $employees = Employee::with(['user','department']) -> paginate(5);
        
         if(count($employees) > 0){
             return response() -> json([

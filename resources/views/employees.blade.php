@@ -32,8 +32,9 @@
                     </tbody>
                 </table>
             </div>
-
+            
         </div>
+        <div id="pagination" class="mt-4 flex gap-2"></div>
 
         <div id="update-emp-model" class="hidden w-full min-h-screen absolute top-0 left-0 bg-gray-700/30">
             <div class=" w-[80%] mx-auto">

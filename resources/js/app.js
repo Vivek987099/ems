@@ -1,6 +1,10 @@
 import './bootstrap';
 
 $(document).ready(function(){
+
+    if(localStorage.getItem('token')){
+        window.location.href='/employees'
+    }
     
     $('#toggle-password').on('click',function(){
         let inputPassword = $('#password')

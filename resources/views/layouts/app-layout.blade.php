@@ -7,7 +7,7 @@
     <title>@yield('title')</title>
     @vite('resources/css/app.css')
 </head>
-<body>
+<body class="bg-[#e7e7e7]">
     <!-- header -->
     @include('header')
 
