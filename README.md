@@ -565,6 +565,3 @@ This project demonstrates hands-on experience with:
 
 GitHub: [@Vivek987099](https://github.com/Vivek987099)
 
-## 📄 License
-
-This project is open-sourced under the **MIT License**.
